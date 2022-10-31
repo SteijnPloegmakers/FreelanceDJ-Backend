@@ -8,5 +8,6 @@ namespace FreelanceDJ.Models
 {
     public class DJaccount
     {
+        private Guid id;
     }
 }
