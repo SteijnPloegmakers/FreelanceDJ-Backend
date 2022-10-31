@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<DjAccountData>(options => options.UseInMemoryDatabase("FreelancedjDB"));
+builder.Services.AddDbContext<DjAccountData>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("FreelanceDjConnectionString")));
 
 var app = builder.Build();
 
