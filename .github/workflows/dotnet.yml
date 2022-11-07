@@ -1,4 +1,4 @@
-name: .NET
+name: Test and Build to Dockerhub
 
 on:
   push:
