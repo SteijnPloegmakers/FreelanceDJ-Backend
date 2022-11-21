@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace FreelanceDJ.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/djaccount")]
     public class DjAccountController : Controller
     {
         private readonly DjAccountData dbContext;
