@@ -18,6 +18,12 @@ namespace FreelanceDJ.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> GetDjAccounts()
+        {
+            return Ok(await dbContext.DjAccounts.ToListAsync());
+        }
+
+        [HttpGet]
         [Route("{id:guid}")]
         public async Task<IActionResult> GetDjAccount([FromRoute] Guid id)
         {
@@ -29,12 +35,6 @@ namespace FreelanceDJ.Controllers
             }
 
             return Ok(djaccount);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetDjAccounts()
-        {
-            return Ok(await dbContext.DjAccounts.ToListAsync());
         }
 
         [HttpPost]
