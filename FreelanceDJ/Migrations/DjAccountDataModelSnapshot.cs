@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FreelanceDJ.Migrations
 {
-    [DbContext(typeof(DjAccountData))]
+    [DbContext(typeof(DataContext))]
     partial class DjAccountDataModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -1,21 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using FreelanceDJ.Data;
-
+using FreelanceDJ.Models.DjAccount;
+using FreelanceDJ.Data.Repos;
 
 namespace FreelanceDJ.Service
 {
-    public class DjAccountService
+    public class DjAccountService : IDJAccountservice
     {
-        private readonly DbContext _dbContext;
+        private readonly IFreelanceDJRepo _freelanceDJRepo;
 
-        public DjAccountService(DjAccountData dbContext)
+        public DjAccountService(IFreelanceDJRepo freelanceDJRepo)
         {
-            this._dbContext = dbContext;
+            _freelanceDJRepo = freelanceDJRepo;
         }
 
-        public GetAllDjAccounts()
+        public async Task<List<DjAccount>> GetAllDjs()
         {
-            _dbContext.DjAccounts
+            var djs = await _freelanceDJRepo.GetAllDjAccounts();
+            return djs.OrderBy(x => x.Name).ToList();
         }
     }
 }
