@@ -1,8 +1,7 @@
-﻿using FreelanceDJ.Data;
-using FreelanceDJ.Data.Repos;
+﻿using FreelanceDJ.Data.Repos;
 using FreelanceDJ.Models.DjAccount;
 using Moq;
-using Xunit;
+using NUnit.Framework;
 
 namespace FreelanceDJ.Tests
 {
@@ -29,7 +28,7 @@ namespace FreelanceDJ.Tests
                     Id = new Guid(),
                     Name = "Dj Platinoza",
                     Description = "Dj Platinoza is eem gave club Dj die lekkere plaatjes mixt",
-                    Email = "DJ@P;atinoza.MGMT.com",
+                    Email = "DJ@Platinoza.MGMT.com",
                     Phone = 316876543,
                     Price = 1200,
                 }
@@ -37,8 +36,8 @@ namespace FreelanceDJ.Tests
         }
 
 
-        [Fact]
-        public async void GetAllDjs_ReturnListWithDjs()
+        [Test]
+        public async Task GetAllDjs_ReturnListWithDjs()
         {
             //Arrange
             var data = new Mock<IFreelanceDJRepo>();
@@ -50,7 +49,7 @@ namespace FreelanceDJ.Tests
             var djs = await djAccountService.GetAllDjs();
 
             //Arrange
-            Assert.Equal(djs.Count , _djaccounts.Count);
+            Assert.AreEqual(djs.Count , _djaccounts.Count);
         }
     }
 }
