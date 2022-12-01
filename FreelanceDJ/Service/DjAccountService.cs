@@ -7,16 +7,16 @@ namespace FreelanceDJ.Service
 {
     public class DjAccountService : IDJAccountservice
     {
-        private readonly IFreelanceDJRepo _freelanceDJRepo;
+        private readonly IFreelanceDJRepository _freelanceDJRepository;
 
-        public DjAccountService(IFreelanceDJRepo freelanceDJRepo)
+        public DjAccountService(IFreelanceDJRepository freelanceDJRepository)
         {
-            _freelanceDJRepo = freelanceDJRepo;
+            _freelanceDJRepository = freelanceDJRepository;
         }
 
         public async Task<List<DjAccount>> GetAllDjs()
         {
-            var djs = await _freelanceDJRepo.GetAllDjAccounts();
+            var djs = await _freelanceDJRepository.GetAllDjAccounts();
             return djs.OrderBy(x => x.Name).ToList();
         }
     }

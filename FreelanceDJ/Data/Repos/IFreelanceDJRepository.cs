@@ -2,7 +2,7 @@
 
 namespace FreelanceDJ.Data.Repos
 {
-    public interface IFreelanceDJRepo
+    public interface IFreelanceDJRepository
     {
         Task<List<DjAccount>> GetAllDjAccounts();
     }

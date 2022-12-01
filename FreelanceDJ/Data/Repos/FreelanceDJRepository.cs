@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelanceDJ.Data.Repos
 {
-    public class FreelanceDJRepo : IFreelanceDJRepo
+    public class FreelanceDJRepository : IFreelanceDJRepository
     {
         private readonly DataContext _dataContext;
 
-        public FreelanceDJRepo(DataContext dataContext)
+        public FreelanceDJRepository(DataContext dataContext)
         {
             _dataContext = dataContext;
         }

@@ -1,10 +1,7 @@
 ﻿using FreelanceDJ.Data;
-using FreelanceDJ.Data.Repos;
 using FreelanceDJ.Models.DjAccount;
 using FreelanceDJ.Service;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 
 namespace FreelanceDJ.Controllers
 {
