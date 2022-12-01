@@ -40,7 +40,7 @@ namespace FreelanceDJ.Tests
         public async Task GetAllDjs_ReturnListWithDjs()
         {
             //Arrange
-            var data = new Mock<IFreelanceDJRepo>();
+            var data = new Mock<IFreelanceDJRepository>();
             data.Setup(m => m.GetAllDjAccounts()).ReturnsAsync(_djaccounts);
 
             var djAccountService = new Service.DjAccountService(data.Object);
