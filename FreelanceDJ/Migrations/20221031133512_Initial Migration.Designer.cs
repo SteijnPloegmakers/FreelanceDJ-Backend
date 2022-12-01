@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FreelanceDJ.Migrations
 {
-    [DbContext(typeof(DjAccountData))]
+    [DbContext(typeof(DataContext))]
     [Migration("20221031133512_Initial Migration")]
     partial class InitialMigration
     {
