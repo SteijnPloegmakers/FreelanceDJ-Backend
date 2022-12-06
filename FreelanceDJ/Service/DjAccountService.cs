@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using FreelanceDJ.Data;
-using FreelanceDJ.Models.DjAccount;
+﻿using FreelanceDJ.Models.DjAccount;
 using FreelanceDJ.Data.Repos;
 
 namespace FreelanceDJ.Service
@@ -16,8 +14,28 @@ namespace FreelanceDJ.Service
 
         public async Task<List<DjAccount>> GetAllDjs()
         {
-            var djs = await _freelanceDJRepository.GetAllDjAccounts();
-            return djs.OrderBy(x => x.Name).ToList();
+            return await _freelanceDJRepository.GetAllDjAccounts();
         }
+
+        public async Task<DjAccount> GetDjAccountById(Guid id)
+        {
+            return await _freelanceDJRepository.GetSpecificDjAccount(id);
+        }
+
+        public async Task<AddDjAccount> AddDjAccount(AddDjAccount addDjAccount)
+        {
+            return await _freelanceDJRepository.AddNewDjAccount(addDjAccount);
+        }
+
+        public async Task<UpdateDjAccount> UpdateDjAccount(Guid id, UpdateDjAccount updateDjAccount)
+        {
+            return await _freelanceDJRepository.UpdateDjAccount(id, updateDjAccount);
+        }
+
+        public async Task<DjAccount> DeleteDjAccountById(Guid id)
+        {
+            return await _freelanceDJRepository.DeleteSpecificDjAccount(id);
+        }
+
     }
 }

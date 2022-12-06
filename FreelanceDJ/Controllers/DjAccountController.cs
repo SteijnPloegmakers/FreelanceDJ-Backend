@@ -1,5 +1,4 @@
-﻿using FreelanceDJ.Data;
-using FreelanceDJ.Models.DjAccount;
+﻿using FreelanceDJ.Models.DjAccount;
 using FreelanceDJ.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,12 +9,10 @@ namespace FreelanceDJ.Controllers
     public class DjAccountController : Controller
     {
         private readonly IDJAccountservice _djAccountservice;
-        private readonly DataContext _dataContext;
 
-        public DjAccountController(IDJAccountservice djAccountservice, DataContext dataContext)
+        public DjAccountController(IDJAccountservice djAccountservice)
         {
             _djAccountservice = djAccountservice;
-            _dataContext = dataContext;
         }
     
 
@@ -29,7 +26,7 @@ namespace FreelanceDJ.Controllers
         [Route("{id:guid}")]
         public async Task<IActionResult> GetDjAccount([FromRoute] Guid id)
         {
-            var djaccount = await _dataContext.DjAccounts.FindAsync(id);
+            var djaccount = await _djAccountservice.GetDjAccountById(id);
 
             if (djaccount == null)
             {
@@ -42,19 +39,7 @@ namespace FreelanceDJ.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDjAccount(AddDjAccount addDjAccount)
         {
-            var djaccount = new DjAccount
-            {
-                Id = Guid.NewGuid(),
-                Name = addDjAccount.Name,
-                Description = addDjAccount.Description,
-                Email = addDjAccount.Email,
-                Phone = addDjAccount.Phone,
-                Price = addDjAccount.Price
-            };
-
-            await _dataContext.DjAccounts.AddAsync(djaccount);
-            await _dataContext.SaveChangesAsync();
-
+            var djaccount = await _djAccountservice.AddDjAccount(addDjAccount);
             return Ok(djaccount);
         }
 
@@ -62,35 +47,18 @@ namespace FreelanceDJ.Controllers
         [Route("{id:guid}")]
         public async Task<IActionResult> UpdateDjAccount([FromRoute] Guid id, UpdateDjAccount updateDjAccount)
         {
-            var djaccount = await _dataContext.DjAccounts.FindAsync(id);
-
-            if (djaccount != null)
-            {
-                djaccount.Name = updateDjAccount.Name;
-                djaccount.Description = updateDjAccount.Description;
-                djaccount.Email = updateDjAccount.Email;
-                djaccount.Phone = updateDjAccount.Phone;
-                djaccount.Price = updateDjAccount.Price;
-
-                await _dataContext.SaveChangesAsync();
-
-                return Ok(djaccount);
-            }
-
-            return NotFound();
+            var djaccount = await _djAccountservice.UpdateDjAccount(id, updateDjAccount);
+            return Ok(djaccount);
         }
 
         [HttpDelete]
         [Route("{id:guid}")]
         public async Task<IActionResult> DeleteDjAccount([FromRoute] Guid id)
         {
-            var djaccount = await _dataContext.DjAccounts.FindAsync(id);
+            var djaccount = await _djAccountservice.DeleteDjAccountById(id);
 
             if (djaccount != null)
             {
-                _dataContext.Remove(djaccount);
-                await _dataContext.SaveChangesAsync();
-
                 return Ok(djaccount);
             }
 
