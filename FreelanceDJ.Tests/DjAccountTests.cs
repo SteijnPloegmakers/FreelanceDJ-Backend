@@ -39,17 +39,37 @@ namespace FreelanceDJ.Tests
         [Test]
         public async Task GetAllDjs_ReturnListWithDjs()
         {
-            //Arrange
             var data = new Mock<IFreelanceDJRepository>();
             data.Setup(m => m.GetAllDjAccounts()).ReturnsAsync(_djaccounts);
-
             var djAccountService = new Service.DjAccountService(data.Object);
 
-            //Act
             var djs = await djAccountService.GetAllDjs();
 
-            //Arrange
             Assert.AreEqual(djs.Count , _djaccounts.Count);
+        }
+
+        [Test]
+        public async Task GetOneSpecificUser_ReturnThisUser()
+        {
+            var data = new Mock<IFreelanceDJRepository>();
+            data.Setup(m => m.GetSpecificDjAccount(It.IsAny<Guid>())).ReturnsAsync(_djaccounts[0]);
+            var djAccountService = new Service.DjAccountService(data.Object);
+
+            var djaccount = await djAccountService.GetDjAccountById(It.IsAny<Guid>());
+
+            Assert.AreEqual(djaccount, _djaccounts[0]);
+        }
+
+        [Test]
+        public async Task DeleteOneSpecificUser_ReturnThisUser()
+        {
+            var data = new Mock<IFreelanceDJRepository>();
+            data.Setup(m => m.DeleteSpecificDjAccount(It.IsAny<Guid>())).ReturnsAsync(_djaccounts[0]);
+            var djAccountService = new Service.DjAccountService(data.Object);
+
+            var djaccount = await djAccountService.DeleteDjAccountById(It.IsAny<Guid>());
+
+            Assert.AreEqual(djaccount, _djaccounts[0]);
         }
     }
 }
