@@ -61,6 +61,18 @@ namespace FreelanceDJ.Tests
         }
 
         [Test]
+        public async Task GetOneWrongSpecificUser_ReturnThisUser()
+        {
+            var data = new Mock<IFreelanceDJRepository>();
+            data.Setup(m => m.GetSpecificDjAccount(It.IsAny<Guid>())).ReturnsAsync(_djaccounts[0]);
+            var djAccountService = new Service.DjAccountService(data.Object);
+
+            var djaccount = await djAccountService.GetDjAccountById(It.IsAny<Guid>());
+
+            Assert.AreNotEqual(djaccount, _djaccounts[1]);
+        }
+
+        [Test]
         public async Task DeleteOneSpecificUser_ReturnThisUser()
         {
             var data = new Mock<IFreelanceDJRepository>();
@@ -70,6 +82,18 @@ namespace FreelanceDJ.Tests
             var djaccount = await djAccountService.DeleteDjAccountById(It.IsAny<Guid>());
 
             Assert.AreEqual(djaccount, _djaccounts[0]);
+        }
+
+        [Test]
+        public async Task DeleteOneWrongSpecificUser_ReturnThisUser()
+        {
+            var data = new Mock<IFreelanceDJRepository>();
+            data.Setup(m => m.DeleteSpecificDjAccount(It.IsAny<Guid>())).ReturnsAsync(_djaccounts[0]);
+            var djAccountService = new Service.DjAccountService(data.Object);
+
+            var djaccount = await djAccountService.DeleteDjAccountById(It.IsAny<Guid>());
+
+            Assert.AreNotEqual(djaccount, _djaccounts[1]);
         }
     }
 }
